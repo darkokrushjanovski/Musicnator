@@ -5,15 +5,7 @@ function Footer() {
   const date = `${current.getDate()}/${
     current.getMonth() + 1
   }/${current.getFullYear()}`;
-  return (
-    <div className="footer">
-      <footer>
-        <p className="footerText">
-          Copyright &copy; {date} All rights reserved
-        </p>
-      </footer>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default Footer;
