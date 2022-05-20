@@ -6,9 +6,9 @@ function NotFound() {
     <div className="main">
       <Container>
         <Row>
-          <Col>
+          <Col md={{ span: 8, offset: 2 }}>
             <Card>
-              <Card.Img variant="top" src={Error} height={500} />
+              <Card.Img variant="top" src={Error} height={400} />
               <Card.Body>
                 <Card.Title className="display-1 text-center">404</Card.Title>
               </Card.Body>

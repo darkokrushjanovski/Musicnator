@@ -45,6 +45,7 @@ function Login() {
       .then(function (response) {
         // handle success
         localStorage.setItem("token", response.data.accessToken);
+
         navigate("/");
 
         toast.success("Login successful", {
@@ -60,6 +61,7 @@ function Login() {
 
       .catch(function (error) {
         // handle error
+
         toast.error("Wrong credentials", {
           position: "top-right",
           autoClose: 2000,
