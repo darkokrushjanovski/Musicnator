@@ -1,18 +1,12 @@
 import React from "react";
 import Picture from "../../assets/ughh.png";
-import {
-  Button,
-  Card,
-  ListGroup,
-  ListGroupItem,
-  Container,
-} from "react-bootstrap";
+import { Button, Card, ListGroup, ListGroupItem, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function User({ user }) {
   return (
-    <Card className="mt-4">
-      <Card.Img variant="top" src={Picture} rounded />
+    <Card border="primary" className="m-3 p-3 border border-2 ">
+      <Image variant="top" src={Picture} roundedCircle />
       <Card.Body>
         <Card.Title className="text-center">
           {user.firstName} {user.lastName}

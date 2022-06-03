@@ -81,7 +81,7 @@ function Register() {
       <Container>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Card>
+            <Card border="primary" className="border border-5">
               <Card.Body className="mt-2">
                 <Card.Title>Create your Musicnator account!</Card.Title>
               </Card.Body>

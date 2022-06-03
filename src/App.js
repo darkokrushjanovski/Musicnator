@@ -9,7 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UploadForm from "./pages/UploadForm";
 import Users from "./components/users/Users";
-import { Container } from "react-bootstrap";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
         <Route path="/upload" element={<UploadForm />} />
         <Route path="*" element={<NotFound />} />
         <Route path="musicians/all" element={<Users />} />
+        <Route path="musician/:uuid" element={<UserProfile />} />
       </Routes>
-
       <ToastContainer />
     </Router>
   );

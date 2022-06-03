@@ -30,57 +30,7 @@ body {
     margin-top: 10px;
 }
 
-
-
-
-/* html{
-    height: 100%;
-    width: 100%;
+.audioPlayer {
+    margin-left: 20px;
+    width: 94%;
 }
-
-
-
-
-.navbar{
-    background-color: #14233c; 
-    color:aliceblue;
-    height: 52px;
-    
-}
-
-.logo{
-   height: 50px; 
-   width: 100%; 
-
-}
-
-.footer,push{  
-    position: fixed;
-background-color:#14233c;   
-color: #717a89;
-height: 30px;
-   left: 0;
-   bottom: 0;
-   width: 100%;  
-   text-align: center;
-}
-
-
-
-.footerText{
-    text-align: center;
-    bottom: auto;  
-    margin:auto;
-    font-size:20px
-     
-    
-}
-
-.homePage{
-    margin-top: 20px;
-}
-
-
-
-
- */

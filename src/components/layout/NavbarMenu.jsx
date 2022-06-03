@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsPlusSquare } from "react-icons/bs";
+import axios from "axios";
 
 function NavbarMenu() {
   const navigate = useNavigate();
@@ -11,6 +12,20 @@ function NavbarMenu() {
   const logOut = () => {
     localStorage.clear();
     navigate("/");
+  };
+
+  const redirectToCurrentUser = () => {
+    try {
+      axios
+        .get(`${process.env.REACT_APP_MUSICNATOR_API_URL}/users/activeUser`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          navigate(`musician/${res.data.uuid}`);
+        });
+    } catch (err) {}
   };
 
   return (
@@ -37,14 +52,18 @@ function NavbarMenu() {
               Home
             </Nav.Link>
             <Nav.Link>About</Nav.Link>
-            <NavDropdown title="Musicians" id="collasible-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/musicians/all">
-                All Musicians
-              </NavDropdown.Item>
-              <NavDropdown.Item>Another action</NavDropdown.Item>
-              <NavDropdown.Item>Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item>Separated link</NavDropdown.Item>
+            <Nav.Link as={Link} to="/musicians/all">
+              Musicians
+            </Nav.Link>
+
+            <NavDropdown title="Categories" id="collasible-nav-dropdown">
+              <NavDropdown.Item>Rock</NavDropdown.Item>
+              <NavDropdown.Item>Pop</NavDropdown.Item>
+              <NavDropdown.Item>Metal</NavDropdown.Item>
+              <NavDropdown.Item>Techno</NavDropdown.Item>
+              <NavDropdown.Item>Rap</NavDropdown.Item>
+              <NavDropdown.Item>Reggae </NavDropdown.Item>
+              <NavDropdown.Item>Trap</NavDropdown.Item>
             </NavDropdown>
           </Nav>
 
@@ -58,21 +77,19 @@ function NavbarMenu() {
             </Nav>
           ) : (
             <Nav>
-              <Nav.Link>
-                <Button as={Link} to="/upload">
-                  <BsPlusSquare size={26} title="Upload your track" />
-                </Button>
-                <Button as={Link} to="/profile/asd" title="Your profile">
-                  <AiOutlineUser size={26} />
-                </Button>
-                <Button
-                  onClick={logOut}
-                  className="primaryButton"
-                  variant="danger"
-                >
-                  Log out
-                </Button>{" "}
-              </Nav.Link>
+              <Button as={Link} to="/upload">
+                <BsPlusSquare size={26} title="Upload your track" />
+              </Button>
+              <Button title="Your profile" onClick={redirectToCurrentUser}>
+                <AiOutlineUser size={26} />
+              </Button>
+              <Button
+                onClick={logOut}
+                className="primaryButton"
+                variant="danger"
+              >
+                Log out
+              </Button>{" "}
             </Nav>
           )}
         </Navbar.Collapse>

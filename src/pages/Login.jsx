@@ -49,7 +49,7 @@ function Login() {
         navigate("/");
 
         toast.success("Login successful", {
-          position: "top-right",
+          position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -63,7 +63,7 @@ function Login() {
         // handle error
 
         toast.error("Wrong credentials", {
-          position: "top-right",
+          position: "top-center",
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -83,7 +83,7 @@ function Login() {
       <Container>
         <Row>
           <Col md={{ span: 8, offset: 2 }}>
-            <Card>
+            <Card border="primary" className="border border-5">
               <Card.Body>
                 <Card.Title>Login with your Musicnator account</Card.Title>
               </Card.Body>
