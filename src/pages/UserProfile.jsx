@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Container, Card, Row, Col, Image, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Picture from "../assets/ughh.png";
+
 import AudioPlayer from "../components/AudioPlayer";
 
 function UserProfile() {
@@ -40,11 +40,16 @@ function UserProfile() {
       <Container className="mt-5">
         <Card border="primary" className="g-col-6 border border-3">
           <Row>
-            <Col sm={5} className="">
-              <Image src={Picture} className="p-4 "></Image>
+            <Col xs={12} sm={12} md={8} lg={4}>
+              <Image
+                width="400"
+                height="auto"
+                src={`${process.env.REACT_APP_MUSICNATOR_API_URL}/uploads/${user.imageResourceUuid}`}
+                className="p-4 "
+              ></Image>
             </Col>
 
-            <Col sm={7} className="ml-4 mt-2">
+            <Col md={8} className="ml-4 mt-2">
               <Card.Text text="primary" className="fw-bold fs-1 px-5">
                 {user.firstName} {user.lastName}
               </Card.Text>

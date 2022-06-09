@@ -11,7 +11,10 @@ function Register() {
     password: "",
     email: "",
     phoneNumber: "",
+    imageResourceUuid: "",
   });
+
+  const [picture, setPicture] = useState(null);
 
   const navigate = useNavigate();
 
@@ -31,6 +34,10 @@ function Register() {
     }
   }, [navigate]);
 
+  const onPictureChange = (e) => {
+    setPicture(e.target.files[0]);
+  };
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -38,39 +45,67 @@ function Register() {
     }));
   };
 
-  const { firstName, lastName, password, email, phoneNumber } = formData;
+  const {
+    firstName,
+    lastName,
+    password,
+    email,
+    phoneNumber,
+    imageResourceUuid,
+  } = formData;
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const data = new FormData();
 
+    data.append("file", picture);
     axios
-      .post(`${process.env.REACT_APP_MUSICNATOR_API_URL}/register`, formData)
+      .post(`${process.env.REACT_APP_MUSICNATOR_API_URL}/uploads`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then(function (response) {
-        // handle success
-        console.log(response);
-        // localStorage.setItem("token", response.data.accessToken);
-        navigate("/login");
-        toast.success("Register successful", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-        });
+        formData.imageResourceUuid = response.data.uuid;
+        console.log(response.data);
+        axios
+          .post(
+            `${process.env.REACT_APP_MUSICNATOR_API_URL}/register`,
+            formData
+          )
+          .then(function (response) {
+            // handle success
+            console.log(response);
+            // localStorage.setItem("token", response.data.accessToken);
+            navigate("/login");
+            toast.success("Register successful", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+            });
+          })
+          .catch(function (error) {
+            // handle error
+            toast.error("Email already registered", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+            });
+          })
+          .then(function () {
+            // always executed
+          });
       })
       .catch(function (error) {
         // handle error
-        toast.error("Email already registered", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-        });
       })
       .then(function () {
         // always executed
@@ -140,6 +175,17 @@ function Register() {
                       onChange={onChange}
                       id="phoneNumber"
                       value={phoneNumber}
+                    />
+                  </Form.Group>
+
+                  <Form.Group controlId="picture" className="mb-3">
+                    <Form.Label className="fw-bold">
+                      Select your profile picture
+                    </Form.Label>
+                    <Form.Control
+                      type="file"
+                      placeholder="Profile picture"
+                      onChange={onPictureChange}
                     />
                   </Form.Group>
 

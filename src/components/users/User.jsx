@@ -1,12 +1,13 @@
 import React from "react";
-import Picture from "../../assets/ughh.png";
 import { Button, Card, ListGroup, ListGroupItem, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function User({ user }) {
   return (
-    <Card border="primary" className="m-3 p-3 border border-2 ">
-      <Image variant="top" src={Picture} roundedCircle />
+    <Card border="primary" className="m-2 p-2 border border-2 ">
+      <Image
+        src={`${process.env.REACT_APP_MUSICNATOR_API_URL}/uploads/${user.imageResourceUuid}`}
+      />
       <Card.Body>
         <Card.Title className="text-center">
           {user.firstName} {user.lastName}

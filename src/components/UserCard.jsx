@@ -1,9 +1,6 @@
 import React from "react";
 import { Col, Row, Card, Image, Container } from "react-bootstrap";
 import Picture from "../assets/ughh.png";
-import UserAudios from "./users/UserAudios";
-import ReactAudioPlayer from "react-audio-player";
-import Audio from "../assets/sound.mp3";
 
 function UserCard({ user }) {
   const phoneNumber = user.phoneNumber;
@@ -30,10 +27,8 @@ function UserCard({ user }) {
       </Row>
 
       <Row>
-        <Col className="text-center fw-bold fs-3">User's uploaded tracks:</Col>
+        <Col className="text-center fw-bold fs-3">User's uploaded tracks:</Col>{" "}
       </Row>
-
-      <Row></Row>
     </Card>
   );
 }

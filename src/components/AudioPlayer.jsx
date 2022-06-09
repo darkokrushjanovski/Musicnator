@@ -22,10 +22,8 @@ function AudioPlayer({ user }) {
           },
         }
       );
-
       setAudios(res.data);
       setLoading(true);
-      console.log(res.data);
     } catch (err) {
       alert(err.message);
     }
