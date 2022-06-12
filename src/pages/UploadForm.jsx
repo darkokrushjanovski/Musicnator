@@ -78,6 +78,15 @@ function UploadForm() {
                 },
               }
             );
+            toast.success("Audio successfully uploaded", {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+            });
           })
           .catch(function (error) {
             // handle error
@@ -88,6 +97,15 @@ function UploadForm() {
       })
       .catch(function (error) {
         // handle error
+        toast.error("Something went wrong", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+        });
       })
       .then(function () {
         // always executed
@@ -128,6 +146,7 @@ function UploadForm() {
                     </Form.Label>
                     <Form.Control
                       type="file"
+                      accept="audio/*"
                       placeholder="Profile picture"
                       onChange={onAudioChange}
                     />
@@ -139,6 +158,7 @@ function UploadForm() {
                     </Form.Label>
                     <Form.Control
                       type="file"
+                      accept="image/*"
                       placeholder="Profile picture"
                       onChange={onPictureChange}
                     />

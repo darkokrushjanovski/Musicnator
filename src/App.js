@@ -10,6 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 import UploadForm from "./pages/UploadForm";
 import Users from "./components/users/Users";
 import UserProfile from "./pages/UserProfile";
+import Croptest from "./pages/Croptest";
+import Category from "./pages/Category";
+import Footer from "./components/layout/Footer";
 
 function App() {
   return (
@@ -21,9 +24,12 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/upload" element={<UploadForm />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="musicians/all" element={<Users />} />
-        <Route path="musician/:uuid" element={<UserProfile />} />
+        <Route path="/musicians/all" element={<Users />} />
+        <Route path="/musician/:uuid" element={<UserProfile />} />
+        <Route path="/croptest" element={<Croptest />} />
+        <Route path="/category/:category" element={<Category />} />
       </Routes>
+
       <ToastContainer />
     </Router>
   );

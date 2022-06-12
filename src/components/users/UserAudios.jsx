@@ -1,14 +1,31 @@
 import React from "react";
+
 import ReactAudioPlayer from "react-audio-player";
-import { Card, Row, Col, Image, Container } from "react-bootstrap";
+import { Card, Row, Col, Image, Container, Badge } from "react-bootstrap";
 
 function UserAudios({ audio }) {
   return (
     <Container fluid>
       <hr className="half-rule" />
-      <Card.Title className="text-center fs-5 fw-bold">
-        {audio.title}
-      </Card.Title>
+      <Row>
+        <Col>
+          <Card.Title className="text-center fs-5 fw-bold">
+            <span className="me-3">{audio.title}</span>
+
+            {audio.categories.map((category) => (
+              <Badge
+                size="sm"
+                pill
+                bg="danger"
+                className="me-3"
+                key={category.uuid}
+              >
+                {category.name}
+              </Badge>
+            ))}
+          </Card.Title>
+        </Col>
+      </Row>
       <Card border="primary" className=" border border-2 p-auto m-auto">
         <Row>
           <Col xs={6} md={4} lg={3} className="m-1">
@@ -19,9 +36,9 @@ function UserAudios({ audio }) {
             ></Image>
           </Col>
           <Col>
-            <Card.Body className="border border-2 m-2">
-              {audio.description}
-            </Card.Body>
+            <Card border="primary" className="m-2 border border-2">
+              <Card.Body className=" m-2">{audio.description}</Card.Body>
+            </Card>
             <ReactAudioPlayer
               src={`${process.env.REACT_APP_MUSICNATOR_API_URL}/uploads/${audio.audioResourceUuid}`}
               controls

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Container, Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
@@ -9,10 +10,17 @@ import axios from "axios";
 function NavbarMenu() {
   const navigate = useNavigate();
 
+  const [categories, setCategories] = useState();
+  const [loading, setLoading] = useState(false);
+
   const logOut = () => {
     localStorage.clear();
     navigate("/");
   };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   const redirectToCurrentUser = () => {
     try {
@@ -24,6 +32,21 @@ function NavbarMenu() {
         })
         .then((res) => {
           navigate(`musician/${res.data.uuid}`);
+        });
+    } catch (err) {}
+  };
+
+  const getCategories = () => {
+    try {
+      axios
+        .get(`${process.env.REACT_APP_MUSICNATOR_API_URL}/categories`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          setCategories(res.data);
+          setLoading(true);
         });
     } catch (err) {}
   };
@@ -57,13 +80,16 @@ function NavbarMenu() {
             </Nav.Link>
 
             <NavDropdown title="Categories" id="collasible-nav-dropdown">
-              <NavDropdown.Item>Rock</NavDropdown.Item>
-              <NavDropdown.Item>Pop</NavDropdown.Item>
-              <NavDropdown.Item>Metal</NavDropdown.Item>
-              <NavDropdown.Item>Techno</NavDropdown.Item>
-              <NavDropdown.Item>Rap</NavDropdown.Item>
-              <NavDropdown.Item>Reggae </NavDropdown.Item>
-              <NavDropdown.Item>Trap</NavDropdown.Item>
+              {loading &&
+                categories.map((category) => (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={`/category/${category.name}`}
+                    key={category.uuid}
+                  >
+                    {category.name}
+                  </NavDropdown.Item>
+                ))}
             </NavDropdown>
           </Nav>
 

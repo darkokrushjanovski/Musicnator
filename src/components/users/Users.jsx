@@ -33,7 +33,7 @@ function Users() {
   return (
     <Fragment>
       <Container fluid>
-        <Card border="primary" className="m-4 border border-3 ">
+        <Card border="primary" className="m-4 border border-3 p-4 ">
           <Row>
             {loading &&
               users.map((user) => (
