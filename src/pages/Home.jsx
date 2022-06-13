@@ -1,61 +1,67 @@
 import React from "react";
-import { useState, useEffect, Fragment } from "react";
-import { Carousel } from "react-bootstrap";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { Card, Col, Row, Container } from "react-bootstrap";
-import axios from "axios";
-import HomeUsers from "../components/users/HomeUsers";
+import { Card, Container, Form, Button, Carousel } from "react-bootstrap";
+import firstPicture from "../assets/logoPicture.png";
+import secondPicture from "../assets/secondPicture.jpg";
+import thirdPicture from "../assets/thirdPicture.jpg";
 
 function Home() {
-  var settings = {
-    dots: true,
-    fade: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-  };
-
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const getUsers = async () => {
-    try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_MUSICNATOR_API_URL}/users`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-
-      setUsers(res.data);
-      setLoading(true);
-    } catch (err) {
-      alert(err.message);
-    }
-  };
-
   return (
-    <Container fluid className="p-4 ">
+    <Container className="p-4">
       <Card border="primary" className="p-4 border border-3">
-        <Row>
-          <Col className="m-3">
-            <Slider style={{ width: "25rem" }} {...settings}>
-              {loading &&
-                users.map((user) => <HomeUsers user={user} key={user.uuid} />)}
-            </Slider>
-          </Col>
-          <Col></Col>
-        </Row>
+        <Carousel style={{ position: "relative" }} variant="dark" slide>
+          <Carousel.Item interval={5000}>
+            <img
+              className="d-block w-100"
+              src={firstPicture}
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              <h1>Welcome to Musicnator</h1>
+              <p className="fs-4">
+                The biggest database for the most talented musicians
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item interval={5000}>
+            <img
+              className="d-block w-100 "
+              src={secondPicture}
+              alt="Second slide"
+            />
+            <Carousel.Caption>
+              <h1 className="text-light">Join thousands of musicians!</h1>
+              <p className="fs-4 text-light">
+                Communicate with thousands of musicians all across the globe
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item interval={5000}>
+            <img
+              className="d-block w-100"
+              src={thirdPicture}
+              alt="Third slide"
+            />
+
+            <Carousel.Caption>
+              <h1 className="text-shadow">Share your own music</h1>
+              <p className="fs-4 text-light">
+                Share your personal tracks so others can see how talented you
+                are!
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+        <Card.Title className="text-center fs-4 fw-bold mt-4">
+          Search for musicians:
+        </Card.Title>
+
+        <Form.Control
+          type="text"
+          size="lg"
+          placeholder="Enter musician name"
+          className="border border-4"
+        ></Form.Control>
+        <Button className="mt-3">search</Button>
       </Card>
     </Container>
   );

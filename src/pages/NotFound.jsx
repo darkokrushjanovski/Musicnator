@@ -1,27 +1,25 @@
-import { Card, Container, Row, Col } from "react-bootstrap";
-import Error from "../assets/Error.png";
+import { Card, Container, Col, Button, Image } from "react-bootstrap";
+import Error from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 function NotFound() {
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    navigate("/");
+  };
   return (
-    <div className="main">
-      <Container>
-        <Row>
-          <Col md={{ span: 8, offset: 2 }}>
-            <Card>
-              <Card.Img variant="top" src={Error} height={400} />
-              <Card.Body>
-                <Card.Title className="display-1 text-center">404</Card.Title>
-              </Card.Body>
-              <Card.Body>
-                <Card.Title className="display-4 text-center">
-                  Not Found
-                </Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container className="text-center mt-10">
+      <Image fluid src={Error}></Image>
+      <Card.Title className="fs-1 fw-bold text-center">
+        Oops... Page not found
+      </Card.Title>
+      <Col className="text-center ">
+        <Button className="mt-2" onClick={onClick}>
+          Go back to homepage
+        </Button>
+      </Col>
+    </Container>
   );
 }
 

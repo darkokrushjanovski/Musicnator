@@ -74,7 +74,7 @@ function NavbarMenu() {
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
-            <Nav.Link>About</Nav.Link>
+
             <Nav.Link as={Link} to="/musicians/all">
               Musicians
             </Nav.Link>

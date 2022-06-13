@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { Card, Row, Col, Container, Image } from "react-bootstrap";
 import ReactAudioPlayer from "react-audio-player";
@@ -8,7 +8,6 @@ import ReactAudioPlayer from "react-audio-player";
 function Category() {
   const [audios, setAudios] = useState();
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState();
 
   const params = useParams();
 
@@ -59,7 +58,18 @@ function Category() {
                 </Col>
               </Row>
               <Row>
-                <Card.Text className="mr-2">Audio by:</Card.Text>
+                <Col lg={1}>
+                  <Card.Text>Audio by:</Card.Text>
+                </Col>
+                <Col>
+                  <Card.Link
+                    as={Link}
+                    to={`/musician/${audio.user.uuid}`}
+                    className="mr-2"
+                  >
+                    {audio.user.firstName} {audio.user.lastName}
+                  </Card.Link>
+                </Col>
               </Row>
             </Card>
           ))}

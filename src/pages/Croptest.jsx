@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
-import Picture from "../assets/ughh.png";
 
 const Croptest = () => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -11,7 +10,6 @@ const Croptest = () => {
     <div className="App">
       <div className="crop-container">
         <Cropper
-          image={Picture}
           crop={crop}
           aspect={4 / 4}
           onCropChange={setCrop}
