@@ -133,7 +133,7 @@ function UploadForm() {
       <Container>
         <Row>
           <Col md={{ span: 8, offset: 2 }}>
-            <Card>
+            <Card border="primary" className="border border-2">
               <Card.Body className="mt-2">
                 <Card.Title>Share your track with others!</Card.Title>
               </Card.Body>
@@ -203,7 +203,7 @@ function UploadForm() {
                     />
 
                     <Button variant="primary" type="submit" className="mt-3">
-                      Test
+                      Share
                     </Button>
                   </Form.Group>
                 </Form>
